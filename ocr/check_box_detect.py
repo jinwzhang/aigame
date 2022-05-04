@@ -7,7 +7,7 @@ import numpy as np
 import re
 import datetime as dt
 
-ch_ocr_reader = easyocr.Reader(['ch_sim'], False)
+ch_ocr_reader = easyocr.Reader(['ch_sim'])
 
 
 def get_window_pos(name):
@@ -74,7 +74,7 @@ def guaji_check(window_name):
     status['fight'] = fight_check(whole_text)
 
     if xiaoren4_check(whole_text):
-        img_ready.save(r'C:\Users\admin\Desktop\pyProjects\ocr\IMG\%s.jpg' % date)  # 存储4小人检测图片
+        img_ready.save(r'.\ocr\IMG\%s.jpg' % date)  # 存储4小人检测图片
         status['xiaoren4'] = True
     buffer = []
     for i in ocr_text:
