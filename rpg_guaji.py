@@ -143,7 +143,7 @@ class RolePlay:
                     top_left_point, _ = object_find.get_single_taget_pos(check_box_detect.get_img(self.window_name), object_template.hotel_template, point_or_box=False, threshold=0.7)
                     if top_left_point:          
                         # print(top_left_point)
-                        top_left_point = np.array([top_left_point[0]+20, top_left_point[1]+13])
+                        top_left_point = np.array([top_left_point[0]+20, top_left_point[1]+5])
                         self.cursor_move_back()
                         cur = np.array(self.find_cursor())
                         if cur.any():
@@ -172,10 +172,10 @@ class RolePlay:
                 print(time0.strftime("%Y-%m-%d, %H:%M:%S"), '回合:', self.huihe, self.fight, '位置:', self.map, self.axis
                       , '上次住店：', self.last_hotel, '想住店：', self.want_hotel)
                 last_huihe = self.huihe
-                time1 = time0
+
             else:
                 self.clearn_screen()
-
+                time1 = dt.datetime.now()
 
             time.sleep(self.guaji_frequncy)
 
@@ -189,4 +189,4 @@ class RolePlay:
 
 
 role = RolePlay('梦幻西游 ONLINE - (无与伦比[兰亭序] - 白米℃[11965514])')
-role.guaji()
+role.guaji(8)
