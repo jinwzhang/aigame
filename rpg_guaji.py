@@ -95,7 +95,7 @@ class RolePlay:
                 print(dt.datetime.now(), ' 回合数已经成功重置')
                 reset = False
 
-            elif (self.huihe in self.hotel_huihe or self.huihe < 5) and abs(self.last_hotel - self.huihe) > 2:
+            elif (self.huihe in self.hotel_huihe or self.huihe < 6) and abs(self.last_hotel - self.huihe) > 2:
                 self.want_hotel = True
                 self.guaji_frequncy = 1
 
@@ -103,7 +103,6 @@ class RolePlay:
                 alert()
 
             elif self.huihe <= 2:
-
                 alert()
             if self.huihe <= 5:  # 重置自动战斗次数
                 print(dt.datetime.now(), ' 尝试重置回合数...')
@@ -148,15 +147,24 @@ class RolePlay:
                         cur = np.array(self.find_cursor())
                         if cur.any():
                             move = top_left_point - cur
-                            self.keymouse.mouse_move(move[0]+18, move[1]-10)
-                            self.keymouse.click_rd(which='left', times=2)
-                            top_left_point, _ = object_find.get_single_taget_pos(check_box_detect.get_img(self.window_name), object_template.hotel_template, point_or_box=False, threshold=0.7)
-                            if not top_left_point:  # 如果酒店窗口消失那么算完成
-                                self.want_hotel = False
-                                print(dt.datetime.now(),  '住店已完成')
-                                self.last_hotel = self.huihe
-                                self.guaji_frequncy = 10
-                                break
+                            self.keymouse.mouse_move(move[0] + rd.randint(-30, 30), move[1] + rd.randint(-30, 30))
+                            time.sleep(0.5)
+                            cur = np.array(self.find_cursor())
+                            move = top_left_point - cur
+                            self.keymouse.mouse_move(move[0]+18, move[1]+8)
+                            top_left_point, _ = object_find.get_single_taget_pos(check_box_detect.get_img(self.window_name), object_template.hotel_template, point_or_box=False, threshold=0.6)
+                            if not top_left_point:
+                                print('遇到了遮挡')
+                                continue
+                            else:
+                                self.keymouse.click_rd(which='left', times=2)
+                                top_left_point, _ = object_find.get_single_taget_pos(check_box_detect.get_img(self.window_name), object_template.hotel_template, point_or_box=False, threshold=0.7)
+                                if not top_left_point:  # 如果酒店窗口消失那么算完成
+                                    self.want_hotel = False
+                                    print(dt.datetime.now(),  '住店已完成')
+                                    self.last_hotel = self.huihe
+                                    self.guaji_frequncy = 10
+                                    break
                     else:
                         self.keymouse.key_press_release('F6')
                         time.sleep(0.5)
@@ -189,4 +197,4 @@ class RolePlay:
 
 
 role = RolePlay('梦幻西游 ONLINE - (无与伦比[兰亭序] - 白米℃[11965514])')
-role.guaji(8)
+role.guaji(7)
