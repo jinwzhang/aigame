@@ -197,4 +197,4 @@ class RolePlay:
 
 
 role = RolePlay('梦幻西游 ONLINE - (无与伦比[兰亭序] - 白米℃[11965514])')
-role.guaji(7)
+role.guaji(8)
